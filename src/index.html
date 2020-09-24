@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termocrivo JS</title>
+</head>
+
+<body>
+    <header>
+        <!-- <h1 class="titulo">Termocrivo</h1> -->
+        <img src="css/img/termocrivologo2.png" alt="">
+    </header>
+
+    <h2>Hello OpenCV.js</h2>
+    <p id="status">OpenCV.js is loading...</p>
+    <div>
+        <div class="inputoutput">
+            <img id="imageSrc" alt="No Image" />
+            <div class="caption">imageSrc <input type="file" id="fileInput" name="file" /></div>
+        </div>
+        <div class="inputoutput">
+            <canvas id="canvasOutput"></canvas>
+            <div class="caption">canvasOutput</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+    </script>
+
+    <script async src="opencv.js" onload="onOpenCvReady()"></script>
+    <script src="termocrivo.js"></script>
+</body>
+
+</html>
