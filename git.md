@@ -1,3 +1,7 @@
+Para relembrar os comandos:
+
+``git help``
+
 Para saber o status do projeto:
 
 ``git status``
