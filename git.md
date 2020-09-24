@@ -21,3 +21,7 @@ Para gravar a lista de tarefas locais:
 Para salvar na branch **Master** do projeto:
 
 ``git push origin master``
+
+Para atualizar o repositório local:
+
+``git pull``
