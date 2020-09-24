@@ -4,17 +4,35 @@ inputElement.addEventListener('change', (e) => {
     imgElement.src = URL.createObjectURL(e.target.files[0]);
 }, false);
 imgElement.onload = function () {
-    let src = cv.imread('canvasInput');
+    let src = cv.imread('imageSrc');
     let dst = new cv.Mat();
-    let gray = new cv.Mat();
-
-    // gray and threshold image
-    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-    cv.threshold(gray, gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU);
-
-    cv.imshow('canvasOutput', gray);
-    src.delete(); dst.delete(); gray.delete();
+    // You can try more different parameters
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
+    cv.imshow('canvasOutput', dst);
+    src.delete(); dst.delete();
 };
 function onOpenCvReady() {
-    document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+    move()
+}
+
+var i = 0;
+function move() {
+    if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("myBar");
+        var width = 10;
+        var id = setInterval(frame, 10);
+        function frame() {
+            if (width >= 100) {
+                elem.innerHTML = ''
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+                elem.innerHTML = width + "%";
+            }
+
+        }
+    }
 }
