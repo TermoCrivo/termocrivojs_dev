@@ -20,4 +20,4 @@ Para gravar a lista de tarefas locais:
 
 Para salvar na branch **Master** do projeto:
 
-``git push orign master``
+``git push origin master``
