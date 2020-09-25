@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/TermoCrivo/termocrivojs_dev/issues"
   },
-  "homepage": "https://github.com/TermoCrivo/termocrivojs_dev#readme"
+  "homepage": "https://github.com/TermoCrivo/termocrivojs_dev#readme",
+  "dependencies": {
+    "get-pixels": "^3.3.2",
+    "node-kmeans": "^1.1.9"
+  }
 }
