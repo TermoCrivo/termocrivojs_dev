@@ -1,37 +1,31 @@
+// const crivo = require('./crivo.js')
+
 let imgElement = document.getElementById('imageSrc');
 let inputElement = document.getElementById('fileInput');
 inputElement.addEventListener('change', (e) => {
     imgElement.src = URL.createObjectURL(e.target.files[0]);
 }, false);
 imgElement.onload = function () {
-    let src = cv.imread('imageSrc', 1);
-    let gray = new cv.Mat();
-    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-    // console.log(src)
-    console.log(gray.data)
-    // let dst = new cv.Mat();
-    // let gray = new cv.Mat();
-    // let opening = new cv.Mat();
-    // let coinsBg = new cv.Mat();
-    // cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
-    // cv.threshold(gray, gray, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU);
+    let src = cv.imread('imageSrc');
+    let srcHSV = new cv.Mat();
+    cv.cvtColor(src, srcHSV, cv.COLOR_RGB2HSV, 0);
 
-    // // get background
-    // let M = cv.Mat.ones(3, 3, cv.CV_8U);
-    // cv.erode(gray, gray, M);
-    // cv.dilate(gray, opening, M);
-    // cv.dilate(opening, coinsBg, M, new cv.Point(-1, -1), 3);
+    let low = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [0, 78, 51, 0]);
+    let low2 = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [173, 78, 51, 0]);
+    let high = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [7, 255, 255, 255]);
+    let high2 = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [179, 255, 255, 255]);
 
-    cv.imshow('canvasOutput', gray);
-    // src.delete(); dst.delete(); gray.delete(); opening.delete(); coinsBg.delete(); M.delete();
+    // You can try more different parameters
 
+    let dst = new cv.Mat();
+    let dst2 = new cv.Mat();
+    let final = new cv.Mat()
 
-    // let src = cv.imread('imageSrc');
-    // let dst = new cv.Mat();
-    // // You can try more different parameters
-    // cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
-    // cv.imshow('canvasOutput', dst);
-    // src.delete(); dst.delete();
+    cv.inRange(srcHSV, low, high, dst);
+    cv.inRange(srcHSV, low2, high2, dst2);
+    cv.add(dst, dst2, final)
+    cv.imshow('canvasOutput', final);
+    // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
 };
 
 
