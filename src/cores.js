@@ -3,13 +3,6 @@ export default function cores(src) {
     let img = new cv.Mat();
     cv.cvtColor(src, img, cv.COLOR_RGB2HSV, 0);
 
-    let row = 0, col = 0
-    let pixel = img.ucharPtr(row, col)
-    let H = pixel[0]
-    let S = pixel[1]
-    let V = pixel[2]
-    let A = pixel[3]
-    // console.log(`HSV-A: ${H},${S},${V} - ${A}`)
 
     const coresRange = {
         low: [

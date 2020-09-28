@@ -1,5 +1,6 @@
 import crivo from './crivo.js'
 import cores from './cores.js'
+import mostraCores from './mostraCores.js'
 
 let imgElement = document.getElementById('imageSrc');
 let inputElement = document.getElementById('fileInput');
@@ -11,9 +12,10 @@ imgElement.onload = function () {
 
     let res = cores(src)
     crivo(res)
+    let resBranco = mostraCores(src, res)
     // console.log(res)
     // console.log(res[0].type())
-    cv.imshow('canvasOutput0', res[0]);
+    cv.imshow('canvasOutput0', resBranco[0]);
     cv.imshow('canvasOutput1', res[1]);
     cv.imshow('canvasOutput2', res[2]);
     cv.imshow('canvasOutput3', res[3]);
