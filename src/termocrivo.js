@@ -1,4 +1,5 @@
-// const crivo = require('./crivo.js')
+import crivo from './crivo.js'
+import cores from './cores.js'
 
 let imgElement = document.getElementById('imageSrc');
 let inputElement = document.getElementById('fileInput');
@@ -7,24 +8,20 @@ inputElement.addEventListener('change', (e) => {
 }, false);
 imgElement.onload = function () {
     let src = cv.imread('imageSrc');
-    let srcHSV = new cv.Mat();
-    cv.cvtColor(src, srcHSV, cv.COLOR_RGB2HSV, 0);
 
-    let low = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [0, 78, 51, 0]);
-    let low2 = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [173, 78, 51, 0]);
-    let high = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [7, 255, 255, 255]);
-    let high2 = new cv.Mat(srcHSV.rows, srcHSV.cols, srcHSV.type(), [179, 255, 255, 255]);
-
-    // You can try more different parameters
-
-    let dst = new cv.Mat();
-    let dst2 = new cv.Mat();
-    let final = new cv.Mat()
-
-    cv.inRange(srcHSV, low, high, dst);
-    cv.inRange(srcHSV, low2, high2, dst2);
-    cv.add(dst, dst2, final)
-    cv.imshow('canvasOutput', final);
+    let res = cores(src)
+    crivo(res)
+    // console.log(res)
+    // console.log(res[0].type())
+    cv.imshow('canvasOutput0', res[0]);
+    cv.imshow('canvasOutput1', res[1]);
+    cv.imshow('canvasOutput2', res[2]);
+    cv.imshow('canvasOutput3', res[3]);
+    cv.imshow('canvasOutput4', res[4]);
+    cv.imshow('canvasOutput5', res[5]);
+    cv.imshow('canvasOutput6', res[6]);
+    cv.imshow('canvasOutput7', res[7]);
+    cv.imshow('canvasOutput8', res[8]);
     // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
 };
 

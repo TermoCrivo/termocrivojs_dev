@@ -44,10 +44,14 @@ header{
 
 .inputoutput{
     width: 100%;
-    display: grid;
-    grid-template-columns: auto auto;
+    /* display: grid; */
+    /* grid-template-columns: auto auto; */
     /* gap: 10px; */
     padding: 20px;
+}
+
+.inputoutput img{
+    max-width: 100%;
 }
 
 .imagemDeEntrada{
@@ -65,6 +69,41 @@ header{
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     padding: 15px;
     border-radius: 30px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+}
+
+.resposta canvas{
+    max-width: 100%;
+}
+
+#canvasOutput0{
+    border-left: 8px solid red;
+}
+#canvasOutput1{
+    border-left: 8px solid orange;
+}
+#canvasOutput2{
+    border-left: 8px solid yellow;
+}
+#canvasOutput3{
+    border-left: 8px solid lime;
+}
+#canvasOutput4{
+    border-left: 8px solid cyan;
+}
+#canvasOutput5{
+    border-left: 8px solid blue;
+}
+#canvasOutput6{
+    border-left: 8px solid purple;
+}
+#canvasOutput7{
+    border-left: 8px solid magenta;
+}
+#canvasOutput8{
+    border-left: 8px solid lightgray;
 }
 
 
