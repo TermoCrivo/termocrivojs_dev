@@ -11,11 +11,12 @@ imgElement.onload = function () {
     let src = cv.imread('imageSrc');
 
     let res = cores(src)
-    crivo(res)
+    let porcentagens = crivo(res)
+    // preenchePorcentagens(porcentagens)
     let resBranco = mostraCores(src, res)
     // console.log(res)
     // console.log(res[0].type())
-    cv.imshow('canvasOutput0', resBranco[0]);
+    cv.imshow('canvasOutput0', res[0]);
     cv.imshow('canvasOutput1', res[1]);
     cv.imshow('canvasOutput2', res[2]);
     cv.imshow('canvasOutput3', res[3]);
@@ -25,8 +26,33 @@ imgElement.onload = function () {
     cv.imshow('canvasOutput7', res[7]);
     cv.imshow('canvasOutput8', res[8]);
     // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
-};
 
+
+
+};
+function preenchePorcentagens(porcentagens) {
+    let resvermelho = document.getElementById('#txtvermelho')
+    let reslaranja = document.getElementById('#txtlaranja')
+    let resamarelo = document.getElementById('#txtamarelo')
+    let resverde = document.getElementById('#txtverde')
+    let resciano = document.getElementById('#txtciano')
+    let resazul = document.getElementById('#txtazul')
+    let resvioleta = document.getElementById('#txtvioleta')
+    let resmagenta = document.getElementById('#txtmagenta')
+    let resbranco = document.getElementById('#txtbranco')
+
+    resvermelho.innerText = porcentagens.vermelhoPorcento
+    reslaranja.innerHTML = porcentagens.laranjaPorcento
+    resamarelo.innerHTML = porcentagens.amareloPorcento
+    resverde.innerHTML = porcentagens.verdePorcento
+    resciano.innerHTML = porcentagens.cianoPorcento
+    resazul.innerHTML = porcentagens.azulPorcento
+    resvioleta.innerHTML = porcentagens.violetaPorcento
+    resmagenta.innerHTML = porcentagens.magentaPorcento
+    resbranco.innerHTML = porcentagens.brancoPorcento
+
+
+}
 
 function onOpenCvReady() {
     move()

@@ -3,25 +3,25 @@ import cores from './cores.js'
 
 export default function crivo(mascaras) {
 
-    analisaPretos(mascaras)
+    let porcentagens = analisaPretos(mascaras)
 
     let res = {
-        vermelhoPorcento: 0,
-        laranjaPorcento: 0,
-        amareloPorcento: 0,
-        verdePorcento: 0,
-        cianoPorcento: 0,
-        azulPorcento: 0,
-        magentaPorcento: 0,
-        violetaPorcento: 0,
-        brancoPorcento: 0
+        vermelhoPorcento: porcentagens[0],
+        laranjaPorcento: porcentagens[1],
+        amareloPorcento: porcentagens[2],
+        verdePorcento: porcentagens[3],
+        cianoPorcento: porcentagens[4],
+        azulPorcento: porcentagens[5],
+        violetaPorcento: porcentagens[6],
+        magentaPorcento: porcentagens[7],
+        brancoPorcento: porcentagens[8]
     }
 
     return res
 }
 
 function analisaPretos(mascaras) {
-    let somaPixel = []
+    let porcentagem = []
 
     mascaras.forEach(matriz => {
         let preto = 3
@@ -38,9 +38,10 @@ function analisaPretos(mascaras) {
                 }
             }
         }
-        somaPixel.push(porcento)
+        porcentagem.push(porcento)
     })
 
-    console.log(somaPixel)
+    console.log(porcentagem)
+    return porcentagem
 }
 

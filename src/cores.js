@@ -1,6 +1,6 @@
 export default function cores(src) {
     let mascaras = []
-    let img = new cv.Mat();
+    let img = new cv.Mat(src.rows, src.cols, src.type());
     cv.cvtColor(src, img, cv.COLOR_RGB2HSV, 0);
 
 
@@ -34,22 +34,27 @@ export default function cores(src) {
     }
     for (let i = 0; i < 10; i++) {
         if (i == 0) {
-            let red = new cv.Mat()
-            let red2 = new cv.Mat()
-            let redFinal = new cv.Mat()
 
-            let lowr = new cv.Mat(img.rows, img.cols, img.type(), coresRange.low[0]);
-            let lowr2 = new cv.Mat(img.rows, img.cols, img.type(), coresRange.low[1]);
-            let highr = new cv.Mat(img.rows, img.cols, img.type(), coresRange.up[0]);
-            let highr2 = new cv.Mat(img.rows, img.cols, img.type(), coresRange.up[1]);
+            let red = new cv.Mat(img.rows, img.cols, img.type())
+            let red2 = new cv.Mat(img.rows, img.cols, img.type())
+            let redFinal = new cv.Mat(img.rows, img.cols, img.type())
 
-            cv.inRange(img, lowr, highr, red);
-            cv.inRange(img, lowr2, highr2, red2);
+            let lowr = new cv.Mat(img.rows, img.cols, img.type(), coresRange.low[0])
+            let lowr2 = new cv.Mat(img.rows, img.cols, img.type(), coresRange.low[1])
+            let highr = new cv.Mat(img.rows, img.cols, img.type(), coresRange.up[0])
+            let highr2 = new cv.Mat(img.rows, img.cols, img.type(), coresRange.up[1])
+
+            cv.inRange(img, lowr, highr, red)
+            cv.inRange(img, lowr2, highr2, red2)
+
+            console.log(red.type())
+
             cv.add(red, red2, redFinal)
+
             mascaras.push(redFinal)
             i = i + 1
         } else {
-            let final = new cv.Mat()
+            let final = new cv.Mat(img.rows, img.cols, img.type())
             let low = new cv.Mat(img.rows, img.cols, img.type(), coresRange.low[i]);
             let high = new cv.Mat(img.rows, img.cols, img.type(), coresRange.up[i]);
 
