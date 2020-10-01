@@ -19,6 +19,8 @@
   "homepage": "https://github.com/TermoCrivo/termocrivojs_dev#readme",
   "dependencies": {
     "get-pixels": "^3.3.2",
-    "node-kmeans": "^1.1.9"
+    "jspdf": "^2.1.1",
+    "node-kmeans": "^1.1.9",
+    "pdfjs": "^2.4.1"
   }
 }

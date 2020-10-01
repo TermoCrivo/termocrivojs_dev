@@ -1,18 +1,25 @@
 import crivo from './crivo.js'
 import cores from './cores.js'
 import mostraCores from './mostraCores.js'
+// import printPDF from './geraPdf.js'
 
+
+let btnPdf = document.getElementById('criarPDF')
+let toPrint = document.getElementById('inputOutput')
+
+let imgElementShow = document.getElementById('imageSrcShow');
 let imgElement = document.getElementById('imageSrc');
 let inputElement = document.getElementById('fileInput');
 inputElement.addEventListener('change', (e) => {
-    imgElement.src = URL.createObjectURL(e.target.files[0]);
+    imgElement.src = URL.createObjectURL(e.target.files[0])
+    imgElementShow.src = URL.createObjectURL(e.target.files[0])
 }, false);
 imgElement.onload = function () {
     let src = cv.imread('imageSrc');
 
     let res = cores(src)
     let porcentagens = crivo(res)
-    // preenchePorcentagens(porcentagens)
+    preenchePorcentagens(porcentagens)
     let resBranco = mostraCores(src, res)
     // console.log(res)
     // console.log(res[0].type())
@@ -27,19 +34,17 @@ imgElement.onload = function () {
     cv.imshow('canvasOutput8', res[8]);
     // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
 
-
-
 };
 function preenchePorcentagens(porcentagens) {
-    let resvermelho = document.getElementById('#txtvermelho')
-    let reslaranja = document.getElementById('#txtlaranja')
-    let resamarelo = document.getElementById('#txtamarelo')
-    let resverde = document.getElementById('#txtverde')
-    let resciano = document.getElementById('#txtciano')
-    let resazul = document.getElementById('#txtazul')
-    let resvioleta = document.getElementById('#txtvioleta')
-    let resmagenta = document.getElementById('#txtmagenta')
-    let resbranco = document.getElementById('#txtbranco')
+    let resvermelho = document.getElementById('txtvermelho')
+    let reslaranja = document.getElementById('txtlaranja')
+    let resamarelo = document.getElementById('txtamarelo')
+    let resverde = document.getElementById('txtverde')
+    let resciano = document.getElementById('txtciano')
+    let resazul = document.getElementById('txtazul')
+    let resvioleta = document.getElementById('txtvioleta')
+    let resmagenta = document.getElementById('txtmagenta')
+    let resbranco = document.getElementById('txtbranco')
 
     resvermelho.innerText = porcentagens.vermelhoPorcento
     reslaranja.innerHTML = porcentagens.laranjaPorcento
@@ -53,6 +58,13 @@ function preenchePorcentagens(porcentagens) {
 
 
 }
+
+// btnPdf.onclick = criarPedeEfe(toPrint)
+
+function criarPedeEfe(elemento) {
+    printPDF(elemento)
+}
+
 
 function onOpenCvReady() {
     move()

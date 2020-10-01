@@ -25,6 +25,7 @@
     <div class="entrada">
         <div class="containerInput">
             <input type="file" id="fileInput" name="file" />
+            <button id="criarPDF">Exportar</button>
         </div>
     </div>
 
@@ -32,11 +33,12 @@
     <div class="inputoutput">
         <div class="entradaDoInput">
             <div class="imgEntrada">
-                <img id="imageSrc" alt="No Image" />
+                <img class="imgShow" id="imageSrcShow" alt="Aguardando imagem..." />
+                <img id="imageSrc" alt="Aguardando imagem..." />
             </div>
 
         </div>
-        <!-- <div id="porcentagens">
+        <div id="porcentagens">
             <div class="itemResultado">
                 <div class="resCor vermelho">
 
@@ -109,7 +111,7 @@
                     <p>% da Cor</p>
                 </div>
             </div>
-        </div> -->
+        </div>
 
     </div>
     <div class="resposta">
@@ -127,6 +129,7 @@
     </div>
 
     <script async src="opencv.js" onloadstart="onOpenCvReady()"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.0.0/polyfills.umd.js"></script>
     <script type="module" src="termocrivo.js"></script>
 </body>
 

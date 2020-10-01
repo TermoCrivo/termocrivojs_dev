@@ -47,8 +47,6 @@ export default function cores(src) {
             cv.inRange(img, lowr, highr, red)
             cv.inRange(img, lowr2, highr2, red2)
 
-            console.log(red.type())
-
             cv.add(red, red2, redFinal)
 
             mascaras.push(redFinal)

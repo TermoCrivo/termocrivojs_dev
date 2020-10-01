@@ -45,6 +45,7 @@ body, html, *{
     width: 15%;
     min-width: 10px;
     padding: 15px;
+    margin-right: 5px;
 }
 header{
     height: 80px;
@@ -64,7 +65,9 @@ header{
     padding-left: 30px;
     height: 25px;
 }
-
+#imageSrc{
+    display: none;
+}
 .entrada{
     width: 100%;
     height: 200px;
@@ -96,8 +99,10 @@ header{
     min-width: 100%;
 }
 
-.inputoutput img{
-    width: 100%;
+.inputoutput .imgShow{
+    width: auto;
+    min-width: 100%;
+    max-width: 100%;
 }
 
 .btnInput{

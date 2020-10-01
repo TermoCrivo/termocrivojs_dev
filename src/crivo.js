@@ -26,6 +26,7 @@ function analisaPretos(mascaras) {
     mascaras.forEach(matriz => {
         let preto = 3
         let total = matriz.cols * matriz.rows
+
         let porcento
         for (let i = 0; i < matriz.rows; i++) {
             for (let j = 0; j < matriz.cols; j++) {
@@ -38,10 +39,9 @@ function analisaPretos(mascaras) {
                 }
             }
         }
-        porcentagem.push(porcento)
+        porcentagem.push(`${porcento.toFixed(2)}%`)
     })
 
-    console.log(porcentagem)
     return porcentagem
 }
 
