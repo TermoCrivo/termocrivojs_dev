@@ -1,6 +1,6 @@
 import './cores'
 import './crivo'
-import './mostraCores'
+//import './mostraCores'
 import './termocrivo'
 import './opencv.js'
 import './geraPdf.js'

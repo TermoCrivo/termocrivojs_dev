@@ -1,12 +1,19 @@
 import jsPDF from 'jspdf'
 
 let btnPdf = document.getElementById('criarPDF')
+let div = document.getElementById('inputOutput')
+
 
 function printPDF() {
     console.log('Entrou')
     const doc = new jsPDF()
-    doc.text("Hello world!", 10, 10)
-    doc.save("./exported/a4.pdf")
-
+    doc.html(document.body, {
+        callback: function (doc) {
+          doc.save();
+        },
+        x: 10,
+        y: 10
+     });
 }
+
 btnPdf.onclick = printPDF
