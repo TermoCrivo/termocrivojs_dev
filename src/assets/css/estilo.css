@@ -1,51 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
 body, html, *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body{
+    background-color: rgb(73, 73, 73);
 }
 
 .vermelho{
-    background: red;
+    border-left: 40px solid red;
+
 }
 .laranja{
-    background: orange;
+    border-left: 40px solid orange
 }
 .amarelo{
-    background: yellow;
+    border-left: 40px solid yellow;
 }
 .verde{
-    background: lime;
+    border-left: 40px solid lime;
 }
 .ciano{
-    background: cyan;
+    border-left: 40px solid cyan;
 }
 .azul{
-    background: blue;
+    border-left: 40px solid blue;
 }
 .violeta{
-    background: purple;
+    border-left: 40px solid purple;
 }
 .magenta{
-    background: magenta;
+    border-left: 40px solid magenta;
 }
 .branco{
-    background: lightgray;
+    border-left: 40px solid lightgray;
 }
 .itemResultado{
-    display: grid;
-    grid-template-columns: 1fr 11fr;
     padding: 10px;
-    padding-left: 30px;
+    padding-left: 15px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 80px;
     margin-bottom: 10px;
+    background-color: white;
 
 }
 .resCor{
-    width: 15%;
-    min-width: 10px;
-    padding: 15px;
-    margin-right: 5px;
+    width: 20px;
+    height: 30px;
+}
+.resTexto p{
+    width: 100%;
 }
 header{
     height: 80px;
@@ -90,8 +98,8 @@ header{
 .inputoutput{
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto;
-    /* gap: 10px; */
+    grid-template-columns: 8fr 4fr;
+    gap: 10px;
     padding: 20px;
 }
 

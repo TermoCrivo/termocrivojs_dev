@@ -1,30 +1,17 @@
 import Jimp from 'jimp'
-async function onRuntimeInitialized() {
-    // load local image file with jimp. It supports jpg, png, bmp, tiff and gif:
-    var jimpSrc = await Jimp.read('../assets/img/imgTestes/lego.jpeg');
-    // `jimpImage.bitmap` property has the decoded ImageData that we can use to create a cv:Mat
-    var src = cv.matFromImageData(jimpSrc.bitmap);
+import cv from './opencv'
+export default async function converterEmImg(mascaras) {
 
-    // following lines is copy&paste of opencv.js dilate tutorial:
-    let dst = new cv.Mat();
-    let M = cv.Mat.ones(5, 5, cv.CV_8U);
-    let anchor = new cv.Point(-1, -1);
-    cv.dilate(src, dst, M, anchor, 1, cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
-    // Now that we are finish, we want to write `dst` to file `output.png`. For this we create a `Jimp`
-    // image which accepts the image data as a [`Buffer`](https://nodejs.org/docs/latest-v10.x/api/buffer.html).
-    // `write('output.png')` will write it to disk and Jimp infers the output format from given file name:
-    console.log(src);
-    new Jimp({
-        width: dst.cols,
-        height: dst.rows,
-        data: Buffer.from(dst.data)
-    })
-        .write('../assets/exported/output.png');
-    src.delete();
-    dst.delete();
+    // let jimp = new Jimp({
+    //     width: mascaras[0].cols,
+    //     height: mascaras[0].rows,
+    //     data: Buffer.from(mascaras[0].data)
+    // })
+    Jimp.read(mascaras, (err, lenna) => {
+        if (err) throw err;
+        var src = cv.matFromImageData(lenna.bitmap)
+        console.log(src)
+      });
+    
+    // jimp.write('../assets/exported/output.png');
 }
-// Finally, load the open.js as before. The function `onRuntimeInitialized` contains our program.
-module.exports = {
-    onRuntimeInitialized
-}
-cv = require('./opencv.js');
