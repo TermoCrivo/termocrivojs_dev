@@ -8,19 +8,30 @@ import cv from './opencv'
 
 
 //let btnPdf = document.getElementById('criarPDF')
-let toPrint = document.getElementById('inputOutput')
-
+// let toPrint = document.getElementById('inputOutput')
+let ident = document.getElementById('ident')
+let identText = document.getElementById('identText')
+let data = document.getElementById('data')
+let dataText = document.getElementById('dataText')
 let imgElementShow = document.getElementById('imageSrcShow');
 let imgElement = document.getElementById('imageSrc');
+let barra = document.getElementById('barra')
 
 let inputElement = document.getElementById('fileInput');
+
 inputElement.addEventListener('change', (e) => {
     imgElement.src = URL.createObjectURL(e.target.files[0])
     imgElementShow.src = URL.createObjectURL(e.target.files[0])
+    barra.style.display = 'block'
 }, false);
 
 imgElement.onload = function () {
+    identText.innerHTML = 'Id: '
+    identText.innerHTML += ident.value
+    dataText.innerHTML = 'Data '
+    dataText.innerHTML += data.value
     let src = cv.imread('imageSrc')
+
     let res = cores(src)
     let porcentagens = crivo(res)
     preenchePorcentagens(porcentagens)
@@ -39,6 +50,8 @@ imgElement.onload = function () {
     // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
 
 };
+
+
 function preenchePorcentagens(porcentagens) {
     let resvermelho = document.getElementById('txtvermelho')
     let reslaranja = document.getElementById('txtlaranja')
@@ -73,25 +86,19 @@ function preenchePorcentagens(porcentagens) {
 
 }
 
-// btnPdf.onclick = criarPedeEfe(toPrint)
-
-function criarPedeEfe(elemento) {
-    printPDF(elemento)
-}
 
 
-function onOpenCvReady() {
-    move()
-}
 
-var i = 0;
-function move() {
+
+
+
+async function move() {
+    let i = 0;
     if (i == 0) {
         i = 1;
-        var elem = document.getElementById("myBar");
-        var width = 10;
-        var id = setInterval(frame, 10);
-        function frame() {
+        let elem = document.getElementById("myBar");
+        let width = 20;
+        let id = setInterval(() => {
             if (width >= 100) {
                 elem.innerHTML = ''
                 clearInterval(id);
@@ -99,9 +106,8 @@ function move() {
             } else {
                 width++;
                 elem.style.width = width + "%";
-                elem.innerHTML = width + "%";
+                // elem.innerHTML = width + "%";
             }
-
-        }
+        }, 20);
     }
 }

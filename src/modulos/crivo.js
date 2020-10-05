@@ -21,8 +21,8 @@ export default function crivo(mascaras) {
 }
 
 function analisaPretos(mascaras) {
+    let barra = document.getElementById('barra')
     let porcentagem = []
-
     mascaras.forEach(matriz => {
         let preto = 3
         let total = matriz.cols * matriz.rows
@@ -41,7 +41,9 @@ function analisaPretos(mascaras) {
         }
         porcentagem.push(`${porcento.toFixed(2)}%`)
     })
-
+    barra.textContent = 'Pronto!'
+    barra.style.color = 'black'
+    barra.style.background = 'lime'
     return porcentagem
 }
 

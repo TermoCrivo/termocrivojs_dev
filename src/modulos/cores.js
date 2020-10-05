@@ -4,7 +4,7 @@ export default function cores(src) {
     let mascaras = []
     let img = new cv.Mat(src.rows, src.cols, src.type());
     cv.cvtColor(src, img, cv.COLOR_RGB2HSV, 0);
-
+    let barra = document.getElementById('barra')
 
     const coresRange = {
         low: [
@@ -62,6 +62,7 @@ export default function cores(src) {
             cv.inRange(img, low, high, final);
             mascaras.push(final)
         }
+
     }
     return mascaras
 }
