@@ -1,4 +1,4 @@
-//const modoDev = process.env.NODE_ENV !== 'production'
+const modoDev = process.env.NODE_ENV !== 'production'
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 //const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -9,14 +9,14 @@ const html2canvas = require('html2canvas')
 //const canvg = require('canvg')
 const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
-    mode: 'development',
-    // mode: modoDev ? 'development' : 'production',
+    // mode: 'development',
+    mode: modoDev ? 'development' : 'production',
     entry: './src/principal.js',
     output: {
         filename: 'principal.js',
         path: __dirname + '/public'
     },
-    
+
     devServer: {
         contentBase: "./public",
         port: 9000,
@@ -76,6 +76,6 @@ module.exports = {
     node: {
         fs: "empty"
     },
-    
+
     devtool: 'eval-source-map'
 }
