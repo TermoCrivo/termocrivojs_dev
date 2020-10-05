@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "cross-env NODE_ENV=production webpack",
+    "postinstall": "webpack -p",
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "Matheus e Gésio",

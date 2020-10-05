@@ -19,7 +19,7 @@ module.exports = {
 
     devServer: {
         contentBase: "./public",
-        port: process.env.PORT || 9000,
+        port: 9000,
     },
 
     // optimization: {
