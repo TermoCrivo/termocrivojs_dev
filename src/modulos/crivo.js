@@ -44,6 +44,9 @@ function analisaPretos(mascaras) {
     barra.textContent = 'Pronto!'
     barra.style.color = 'black'
     barra.style.background = 'lime'
+    setInterval(() => {
+        barra.style.display = 'none'
+    }, 5000)
     return porcentagem
 }
 

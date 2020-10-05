@@ -63,15 +63,15 @@ function preenchePorcentagens(porcentagens) {
     let resmagenta = document.getElementById('txtmagenta')
     let resbranco = document.getElementById('txtbranco')
 
-    resvermelho.innerText = `Porcentagem de vermelho: `
-    reslaranja.innerHTML = `Porcentagem de laranja: `
-    resamarelo.innerHTML = `Porcentagem de amarelo: `
-    resverde.innerHTML = `Porcentagem de verde: `
-    resciano.innerHTML = `Porcentagem de ciano: `
-    resazul.innerHTML = `Porcentagem de azul: `
-    resvioleta.innerHTML = `Porcentagem de violeta: `
-    resmagenta.innerHTML = `Porcentagem de magenta: `
-    resbranco.innerHTML = `Porcentagem de branco: `
+    resvermelho.innerText = `Vermelho(%): `
+    reslaranja.innerHTML = `Laranja(%): `
+    resamarelo.innerHTML = `Amarelo(%): `
+    resverde.innerHTML = `Verde(%): `
+    resciano.innerHTML = `Ciano(%): `
+    resazul.innerHTML = `Azul(%): `
+    resvioleta.innerHTML = `Violeta(%): `
+    resmagenta.innerHTML = `Magenta(%): `
+    resbranco.innerHTML = `Branco(%): `
 
     resvermelho.innerText += ` ${porcentagens.vermelhoPorcento}`
     reslaranja.innerHTML += `${porcentagens.laranjaPorcento}`
