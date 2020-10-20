@@ -31,6 +31,8 @@ imgElement.onload = function () {
     dataText.innerHTML = 'Data '
     dataText.innerHTML += data.value
     let src = cv.imread('imageSrc')
+    let img = new cv.Mat(src.rows, src.cols, src.type());
+    cv.cvtColor(src, img, cv.COLOR_RGB2HSV, 0);
 
     let res = cores(src)
     let porcentagens = crivo(res)
@@ -47,6 +49,7 @@ imgElement.onload = function () {
     cv.imshow('canvasOutput6', res[6]);
     cv.imshow('canvasOutput7', res[7]);
     cv.imshow('canvasOutput8', res[8]);
+    cv.imshow('canvasOutput9', res[9]);
     // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
 
 };
@@ -62,6 +65,7 @@ function preenchePorcentagens(porcentagens) {
     let resvioleta = document.getElementById('txtvioleta')
     let resmagenta = document.getElementById('txtmagenta')
     let resbranco = document.getElementById('txtbranco')
+    let respreto = document.getElementById('txtpreto')
 
     resvermelho.innerText = `Vermelho(%): `
     reslaranja.innerHTML = `Laranja(%): `
@@ -72,6 +76,7 @@ function preenchePorcentagens(porcentagens) {
     resvioleta.innerHTML = `Violeta(%): `
     resmagenta.innerHTML = `Magenta(%): `
     resbranco.innerHTML = `Branco(%): `
+    respreto.innerHTML = `Preto(%): `
 
     resvermelho.innerText += ` ${porcentagens.vermelhoPorcento}`
     reslaranja.innerHTML += `${porcentagens.laranjaPorcento}`
@@ -82,6 +87,7 @@ function preenchePorcentagens(porcentagens) {
     resvioleta.innerHTML += `${porcentagens.violetaPorcento}`
     resmagenta.innerHTML += `${porcentagens.magentaPorcento}`
     resbranco.innerHTML += `${porcentagens.brancoPorcento}`
+    respreto.innerHTML += `${porcentagens.pretoPorcento}`
 
 
 }

@@ -14,7 +14,8 @@ export default function crivo(mascaras) {
         azulPorcento: porcentagens[5],
         violetaPorcento: porcentagens[6],
         magentaPorcento: porcentagens[7],
-        brancoPorcento: porcentagens[8]
+        brancoPorcento: porcentagens[8],
+        pretoPorcento: porcentagens[9]
     }
 
     return res

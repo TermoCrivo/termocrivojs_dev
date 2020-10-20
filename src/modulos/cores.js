@@ -17,7 +17,8 @@ export default function cores(src) {
             [99, 78, 51, 0], // lowAzul
             [129, 78, 51, 0], // lowVioleta
             [144, 78, 51, 0], // lowMagenta
-            [0, 0, 204, 0] // lowBranco
+            [0, 0, 204, 0], // lowBranco
+            [0, 0, 0, 0] // lowPreto
 
         ],
         up: [
@@ -30,11 +31,12 @@ export default function cores(src) {
             [128, 255, 255, 255], // upAzul
             [143, 255, 255, 255], // upVioleta
             [172, 255, 255, 255], // upMagenta
-            [179, 77, 255, 255] // upBranco
+            [179, 77, 255, 255], // upBranco
+            [179, 255, 50, 255] // upPreto
         ]
 
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 11; i++) {
         if (i == 0) {
 
             let red = new cv.Mat(img.rows, img.cols, img.type())

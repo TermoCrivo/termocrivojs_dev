@@ -39,6 +39,9 @@ body{
 .branco{
     border-left: 40px solid lightgray;
 }
+.preto{
+    border-left: 40px solid black;
+}
 .itemResultado{
     padding: 10px;
     padding-left: 15px;
@@ -207,6 +210,9 @@ footer{
 }
 #canvasOutput8{
     border-left: 8px solid lightgray;
+}
+#canvasOutput9{
+    border-left: 8px solid black;
 }
 
 @media print{
