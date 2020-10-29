@@ -15,6 +15,7 @@
   "devDependencies": {
     "canvg": "^3.0.6",
     "copy-webpack-plugin": "^6.2.0",
+    "cropperjs": "^1.5.9",
     "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
     "dompurify": "^2.1.1",
@@ -27,6 +28,7 @@
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "sass-loader": "^10.0.2",
+    "skmeans": "^0.11.3",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.2.2",
     "webpack": "^4.44.2",

@@ -2,13 +2,16 @@ import crivo from './crivo.js'
 import cores from './cores.js'
 import mostraCores from './mostraCores.js'
 import getSrc from './geraPdf.js'
-import converterEmImg from './jimpTestes.js'
+import refinar from './refinar.js'
+import cortar from './crop.js'
+import converterEmImg from './jimpimg.js'
+import grabCut from './grabcut.js'
 import cv from './opencv'
-// import printPDF from './geraPdf.js'
+import preenchePorcentagens from './preencherPorcentagens.js'
+import jimpCanvas from './jimpimg.js'
+import kmeans from './kmeans.js'
+import calcPorcentagens from './porcentagens.js'
 
-
-//let btnPdf = document.getElementById('criarPDF')
-// let toPrint = document.getElementById('inputOutput')
 let ident = document.getElementById('ident')
 let identText = document.getElementById('identText')
 let data = document.getElementById('data')
@@ -17,11 +20,26 @@ let imgElementShow = document.getElementById('imageSrcShow');
 let imgElement = document.getElementById('imageSrc');
 let barra = document.getElementById('barra')
 
+
+const canvasResult = document.getElementById("canvasResult")
+const canvasCut = document.getElementById("canvasCut")
+const canvasInput = document.getElementById("canvasInput")
+const canvasRect = document.getElementById("canvasRect")
+const canvasAdjust = document.getElementById("canvasAdjust")
+const container = document.getElementById("container")
+const containerCut = document.getElementById("containerCut")
+
+const fg = document.getElementById("fg")
+const bg = document.getElementById("bg")
+const validate = document.getElementById("validate")
+const crop = document.getElementById("crop")
+
+let colorMarker = "green"
 let inputElement = document.getElementById('fileInput');
 
 inputElement.addEventListener('change', (e) => {
     imgElement.src = URL.createObjectURL(e.target.files[0])
-    imgElementShow.src = URL.createObjectURL(e.target.files[0])
+    // imgElementShow.src = URL.createObjectURL(e.target.files[0])
     barra.style.display = 'block'
 }, false);
 
@@ -31,15 +49,13 @@ imgElement.onload = function () {
     dataText.innerHTML = 'Data '
     dataText.innerHTML += data.value
     let src = cv.imread('imageSrc')
-    let img = new cv.Mat(src.rows, src.cols, src.type());
-    cv.cvtColor(src, img, cv.COLOR_RGB2HSV, 0);
 
-    let res = cores(src)
-    let porcentagens = crivo(res)
-    preenchePorcentagens(porcentagens)
-    let resBranco = mostraCores(src, res)
-    // console.log(res)
-    // console.log(res[0].type())
+    //let resBranco = mostraCores(src, res)
+    let res = kmeans(src)
+
+    cv.imshow("canvasResult",src)
+    cv.imshow("canvasCut", src);
+    cv.imshow("canvasInput", src);
     cv.imshow('canvasOutput0', res[0]);
     cv.imshow('canvasOutput1', res[1]);
     cv.imshow('canvasOutput2', res[2]);
@@ -49,54 +65,86 @@ imgElement.onload = function () {
     cv.imshow('canvasOutput6', res[6]);
     cv.imshow('canvasOutput7', res[7]);
     cv.imshow('canvasOutput8', res[8]);
-    cv.imshow('canvasOutput9', res[9]);
-    // src.delete(); dst.delete(); low.delete(); high.delete(); srcHSV.delete();
+
+    fg.disabled = false
+    bg.disabled = false
+    crop.disabled = false
+    validate.disabled = false
+    adjustContainerAndLayer()
+
+    refinar(canvasAdjust, fg, colorMarker)    
+
+    let options = {
+        left: 1,
+        top: 150,
+        width: 479,
+        height: 350
+    }
+    cortar(canvasCut, options)
+
+    preenchePorcentagens(calcPorcentagens(res))
+
 
 };
 
+crop.onclick = () => { 
 
-function preenchePorcentagens(porcentagens) {
-    let resvermelho = document.getElementById('txtvermelho')
-    let reslaranja = document.getElementById('txtlaranja')
-    let resamarelo = document.getElementById('txtamarelo')
-    let resverde = document.getElementById('txtverde')
-    let resciano = document.getElementById('txtciano')
-    let resazul = document.getElementById('txtazul')
-    let resvioleta = document.getElementById('txtvioleta')
-    let resmagenta = document.getElementById('txtmagenta')
-    let resbranco = document.getElementById('txtbranco')
-    let respreto = document.getElementById('txtpreto')
+    let cropper = cortar(canvasCut)
+    let src = cv.imread('canvasInput')
+    let srcCut = jimpCanvas(src,cropper[1])
+    let res = kmeans(srcCut)
+    cv.imshow("canvasResult", srcCut)
+    cv.imshow('canvasOutput0', res[0]);
+    cv.imshow('canvasOutput1', res[1]);
+    cv.imshow('canvasOutput2', res[2]);
+    cv.imshow('canvasOutput3', res[3]);
+    cv.imshow('canvasOutput4', res[4]);
+    cv.imshow('canvasOutput5', res[5]);
+    cv.imshow('canvasOutput6', res[6]);
+    cv.imshow('canvasOutput7', res[7]);
+    cv.imshow('canvasOutput8', res[8]);
 
-    resvermelho.innerText = `Vermelho(%): `
-    reslaranja.innerHTML = `Laranja(%): `
-    resamarelo.innerHTML = `Amarelo(%): `
-    resverde.innerHTML = `Verde(%): `
-    resciano.innerHTML = `Ciano(%): `
-    resazul.innerHTML = `Azul(%): `
-    resvioleta.innerHTML = `Violeta(%): `
-    resmagenta.innerHTML = `Magenta(%): `
-    resbranco.innerHTML = `Branco(%): `
-    respreto.innerHTML = `Preto(%): `
-
-    resvermelho.innerText += ` ${porcentagens.vermelhoPorcento}`
-    reslaranja.innerHTML += `${porcentagens.laranjaPorcento}`
-    resamarelo.innerHTML += `${porcentagens.amareloPorcento}`
-    resverde.innerHTML += `${porcentagens.verdePorcento}`
-    resciano.innerHTML += `${porcentagens.cianoPorcento}`
-    resazul.innerHTML += `${porcentagens.azulPorcento}`
-    resvioleta.innerHTML += `${porcentagens.violetaPorcento}`
-    resmagenta.innerHTML += `${porcentagens.magentaPorcento}`
-    resbranco.innerHTML += `${porcentagens.brancoPorcento}`
-    respreto.innerHTML += `${porcentagens.pretoPorcento}`
-
-
+    preenchePorcentagens(calcPorcentagens(res))
+    
+    cortar(canvasCut, cropper[1])
 }
 
+validate.onclick = () => {
+    let cropper = cortar(canvasCut)
 
+    let newmask = cv.imread("canvasAdjust", 0)
+    let src = cv.imread("canvasInput")
+    let grab = grabCut(src, newmask, cropper[1])
+    cv.imshow('canvasOutput', grab);
+    cv.imshow("canvasResult", grab)
+    let srcGrab = cv.imread("canvasOutput")
+    let res = kmeans(srcGrab)
 
+    cv.imshow('canvasOutput0', res[0]);
+    cv.imshow('canvasOutput1', res[1]);
+    cv.imshow('canvasOutput2', res[2]);
+    cv.imshow('canvasOutput3', res[3]);
+    cv.imshow('canvasOutput4', res[4]);
+    cv.imshow('canvasOutput5', res[5]);
+    cv.imshow('canvasOutput6', res[6]);
+    cv.imshow('canvasOutput7', res[7]);
+    cv.imshow('canvasOutput8', res[8]);
 
+    preenchePorcentagens(calcPorcentagens(res))
+    
+    cortar(canvasCut, cropper[1])
+    
+}
 
-
+function adjustContainerAndLayer() {
+    const box = canvasInput.getBoundingClientRect();
+    canvasAdjust.width = box.width;
+    canvasAdjust.height = box.height;
+    container.style.width = box.width + "px";
+    container.style.height = box.height + "px";
+    containerCut.style.width = box.width + "px";
+    containerCut.style.height = box.height + "px";
+}
 
 async function move() {
     let i = 0;
@@ -112,7 +160,6 @@ async function move() {
             } else {
                 width++;
                 elem.style.width = width + "%";
-                // elem.innerHTML = width + "%";
             }
         }, 20);
     }

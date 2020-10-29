@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termocrivo JS</title>
     <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
-
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.css"
+        integrity="sha512-949FvIQOibfhLTgmNws4F3DVlYz3FmCRRhJznR22hx76SKkcpZiVV5Kwo0iwK9L6BFuY+6mpdqB2+vDIGVuyHg=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.js"
+        integrity="sha512-oqBsjjSHWqkDx4UKoU+5IUZN2nW2qDp2GFSKw9+mcFm+ZywqfBKp79nfWmGPco2wzTWuE46XpjtCjZ9tFmI12g=="
+        crossorigin="anonymous"></script>
+    </head>
 
 <body>
 
@@ -38,16 +43,42 @@
             Carregando...
         </div>
     </div>
+    
+    <div>Canvas input</div>
+    <div class="containerCut" id="containerCut">
+        <canvas id="canvasCut"></canvas>
+    </div>
+    <div>
+        <button id="fg" disabled>
+            Foreground
+        </button>
+        <button id="bg" disabled>
+            Background
+        </button>
+        <button id="validate" disabled>Validate</button>
+        <button id="crop" disabled>
+            Cortar
+        </button>
+    </div>
+    <div id="container">
+        <canvas id="canvasInput"></canvas>
+        <canvas id="canvasAdjust"></canvas>
+    </div>
+    <div>Canvas output</div>
+    <div>
+        <canvas class="output" id="canvasOutput"></canvas>
+    </div>
     <div id="print">
         <div class="infos">
             <h4 id="identText" class="ident"></h4>
             <p id="dataText" class="ident"></p>
         </div>
         <div class="inputoutput">
-
+            
             <div class="entradaDoInput">
                 <div class="imgEntrada">
-                    <img src="./assets/img/addimg.png" class="imgShow" id="imageSrcShow" alt="Aguardando imagem..." />
+                    <!-- <img src="./assets/img/addimg.png" class="imgShow" id="imageSrcShow" alt="Aguardando imagem..." /> -->
+                    <canvas id="canvasResult">Resultado!</canvas>
                     <img id="imageSrc" alt="Aguardando imagem..." />
                 </div>
 
@@ -65,7 +96,6 @@
                     <canvas id="canvasOutput6"></canvas>
                     <canvas id="canvasOutput7"></canvas>
                     <canvas id="canvasOutput8"></canvas>
-                    <canvas id="canvasOutput9"></canvas>
                 </div>
                 <div class="itemResultado vermelho">
                     <div class="resTexto" id="txtvermelho">
@@ -110,11 +140,6 @@
                 <div class="itemResultado branco">
                     <div class="resTexto" id="txtbranco">
                         <p> Branco(%): </p>
-                    </div>
-                </div>
-                <div class="itemResultado preto">
-                    <div class="resTexto" id="txtpreto">
-                        <p> Preto(%): </p>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,29 @@ body, html, *{
     box-sizing: border-box;
     font-family: 'Ubuntu', sans-serif;
 }
+.containerCut{
+    background-color: rgb(107, 107, 107);
+    margin: 10px auto;
+}
+#canvasAdjust {
+    cursor: crosshair;
+    z-index: 10;
+}
+.output{
+    margin: 0 auto;
+}
+#canvasInput, #canvasAdjust{
+    position:absolute;
+}
+#canvasInput{
+    cursor: not-allowed;
+}
+
+#container {
+    height: 200px;
+    position:relative;
+    margin: 10px auto;
+}
 
 body{
     background-color: rgb(73, 73, 73);
