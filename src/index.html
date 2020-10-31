@@ -12,7 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.9/cropper.js"
         integrity="sha512-oqBsjjSHWqkDx4UKoU+5IUZN2nW2qDp2GFSKw9+mcFm+ZywqfBKp79nfWmGPco2wzTWuE46XpjtCjZ9tFmI12g=="
         crossorigin="anonymous"></script>
-    </head>
+</head>
 
 <body>
 
@@ -42,31 +42,44 @@
         <div id="barra">
             Carregando...
         </div>
-    </div>
-    
-    <div>Canvas input</div>
-    <div class="containerCut" id="containerCut">
-        <canvas id="canvasCut"></canvas>
-    </div>
-    <div>
-        <button id="fg" disabled>
-            Foreground
-        </button>
-        <button id="bg" disabled>
-            Background
-        </button>
-        <button id="validate" disabled>Validate</button>
-        <button id="crop" disabled>
-            Cortar
-        </button>
-    </div>
-    <div id="container">
-        <canvas id="canvasInput"></canvas>
-        <canvas id="canvasAdjust"></canvas>
-    </div>
-    <div>Canvas output</div>
-    <div>
-        <canvas class="output" id="canvasOutput"></canvas>
+
+        <div id="containerCrop">
+            <div class="containerCut" id="containerCut">
+                <canvas id="canvasCut"></canvas>
+
+            </div>
+            <div class="containerButtons">
+                <div class="buttons">
+
+                    <button id="validate" disabled>Auto-Segmentar</button>
+                    <button id="crop" disabled>
+                        Cortar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="containerGrabcut">
+            <div id="container">
+                <canvas id="canvasInput"></canvas>
+                <canvas id="canvasAdjust"></canvas>
+
+            </div>
+            <div class="containerButtons">
+                <div class="buttons">
+                    <button id="fg" disabled>
+                        Incluir
+                    </button>
+                    <button id="bg" disabled>
+                        Remover
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
     <div id="print">
         <div class="infos">
@@ -74,7 +87,7 @@
             <p id="dataText" class="ident"></p>
         </div>
         <div class="inputoutput">
-            
+
             <div class="entradaDoInput">
                 <div class="imgEntrada">
                     <!-- <img src="./assets/img/addimg.png" class="imgShow" id="imageSrcShow" alt="Aguardando imagem..." /> -->

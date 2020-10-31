@@ -1,10 +1,6 @@
-import crivo from './crivo.js'
-import cores from './cores.js'
-import mostraCores from './mostraCores.js'
-import getSrc from './geraPdf.js'
+
 import refinar from './refinar.js'
 import cortar from './crop.js'
-import converterEmImg from './jimpimg.js'
 import grabCut from './grabcut.js'
 import cv from './opencv'
 import preenchePorcentagens from './preencherPorcentagens.js'
@@ -16,18 +12,18 @@ let ident = document.getElementById('ident')
 let identText = document.getElementById('identText')
 let data = document.getElementById('data')
 let dataText = document.getElementById('dataText')
-let imgElementShow = document.getElementById('imageSrcShow');
 let imgElement = document.getElementById('imageSrc');
 let barra = document.getElementById('barra')
 
 
-const canvasResult = document.getElementById("canvasResult")
 const canvasCut = document.getElementById("canvasCut")
 const canvasInput = document.getElementById("canvasInput")
-const canvasRect = document.getElementById("canvasRect")
 const canvasAdjust = document.getElementById("canvasAdjust")
 const container = document.getElementById("container")
 const containerCut = document.getElementById("containerCut")
+// const containerCrop = document.getElementById("containerCrop")
+const containerGrabcut = document.getElementById("containerGrabcut")
+const print = document.getElementById("print")
 
 const fg = document.getElementById("fg")
 const bg = document.getElementById("bg")
@@ -39,21 +35,23 @@ let inputElement = document.getElementById('fileInput');
 
 inputElement.addEventListener('change', (e) => {
     imgElement.src = URL.createObjectURL(e.target.files[0])
-    // imgElementShow.src = URL.createObjectURL(e.target.files[0])
     barra.style.display = 'block'
+    // containerGrabcut.style.display = "none"
 }, false);
 
+print.style.display = "none"
+
 imgElement.onload = function () {
+
     identText.innerHTML = 'Id: '
     identText.innerHTML += ident.value
     dataText.innerHTML = 'Data '
     dataText.innerHTML += data.value
     let src = cv.imread('imageSrc')
 
-    //let resBranco = mostraCores(src, res)
     let res = kmeans(src)
 
-    cv.imshow("canvasResult",src)
+    cv.imshow("canvasResult", src)
     cv.imshow("canvasCut", src);
     cv.imshow("canvasInput", src);
     cv.imshow('canvasOutput0', res[0]);
@@ -72,7 +70,7 @@ imgElement.onload = function () {
     validate.disabled = false
     adjustContainerAndLayer()
 
-    refinar(canvasAdjust, fg, colorMarker)    
+    refinar(canvasAdjust, fg, colorMarker)
 
     let options = {
         left: 1,
@@ -84,14 +82,13 @@ imgElement.onload = function () {
 
     preenchePorcentagens(calcPorcentagens(res))
 
-
+    print.style.display = ""
 };
 
-crop.onclick = () => { 
-
+crop.onclick = () => {
     let cropper = cortar(canvasCut)
     let src = cv.imread('canvasInput')
-    let srcCut = jimpCanvas(src,cropper[1])
+    let srcCut = jimpCanvas(src, cropper[1])
     let res = kmeans(srcCut)
     cv.imshow("canvasResult", srcCut)
     cv.imshow('canvasOutput0', res[0]);
@@ -105,19 +102,20 @@ crop.onclick = () => {
     cv.imshow('canvasOutput8', res[8]);
 
     preenchePorcentagens(calcPorcentagens(res))
-    
+
     cortar(canvasCut, cropper[1])
+    containerGrabcut.style.display = "none"
 }
 
 validate.onclick = () => {
+    containerGrabcut.style.display = " "
     let cropper = cortar(canvasCut)
 
     let newmask = cv.imread("canvasAdjust", 0)
     let src = cv.imread("canvasInput")
     let grab = grabCut(src, newmask, cropper[1])
-    cv.imshow('canvasOutput', grab);
     cv.imshow("canvasResult", grab)
-    let srcGrab = cv.imread("canvasOutput")
+    let srcGrab = cv.imread("canvasResult")
     let res = kmeans(srcGrab)
 
     cv.imshow('canvasOutput0', res[0]);
@@ -131,9 +129,10 @@ validate.onclick = () => {
     cv.imshow('canvasOutput8', res[8]);
 
     preenchePorcentagens(calcPorcentagens(res))
-    
+
     cortar(canvasCut, cropper[1])
-    
+
+    print.style.display = ""
 }
 
 function adjustContainerAndLayer() {
@@ -144,23 +143,4 @@ function adjustContainerAndLayer() {
     container.style.height = box.height + "px";
     containerCut.style.width = box.width + "px";
     containerCut.style.height = box.height + "px";
-}
-
-async function move() {
-    let i = 0;
-    if (i == 0) {
-        i = 1;
-        let elem = document.getElementById("myBar");
-        let width = 20;
-        let id = setInterval(() => {
-            if (width >= 100) {
-                elem.innerHTML = ''
-                clearInterval(id);
-                i = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-            }
-        }, 20);
-    }
 }
