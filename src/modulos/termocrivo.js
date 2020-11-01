@@ -109,7 +109,7 @@ crop.onclick = () => {
 }
 
 validate[0].onclick = () => {
-    containerGrabcut.style.display = " "
+    containerGrabcut.style.display = ""
     let cropper = cortar(canvasCut)
 
     let newmask = cv.imread("canvasAdjust", 0)
@@ -137,7 +137,7 @@ validate[0].onclick = () => {
 }
 
 validate[1].onclick = () => {
-    containerGrabcut.style.display = " "
+    containerGrabcut.style.display = ""
     let cropper = cortar(canvasCut)
 
     let newmask = cv.imread("canvasAdjust", 0)
