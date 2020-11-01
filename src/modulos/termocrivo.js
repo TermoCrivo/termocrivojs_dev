@@ -27,7 +27,7 @@ const print = document.getElementById("print")
 
 const fg = document.getElementById("fg")
 const bg = document.getElementById("bg")
-const validate = document.getElementById("validate")
+const validate = document.getElementsByClassName("validate")
 const crop = document.getElementById("crop")
 
 let colorMarker = "green"
@@ -67,7 +67,8 @@ imgElement.onload = function () {
     fg.disabled = false
     bg.disabled = false
     crop.disabled = false
-    validate.disabled = false
+    validate[0].disabled = false
+    validate[1].disabled = false
     adjustContainerAndLayer()
 
     refinar(canvasAdjust, fg, colorMarker)
@@ -107,7 +108,35 @@ crop.onclick = () => {
     containerGrabcut.style.display = "none"
 }
 
-validate.onclick = () => {
+validate[0].onclick = () => {
+    containerGrabcut.style.display = " "
+    let cropper = cortar(canvasCut)
+
+    let newmask = cv.imread("canvasAdjust", 0)
+    let src = cv.imread("canvasInput")
+    let grab = grabCut(src, newmask, cropper[1])
+    cv.imshow("canvasResult", grab)
+    let srcGrab = cv.imread("canvasResult")
+    let res = kmeans(srcGrab)
+
+    cv.imshow('canvasOutput0', res[0]);
+    cv.imshow('canvasOutput1', res[1]);
+    cv.imshow('canvasOutput2', res[2]);
+    cv.imshow('canvasOutput3', res[3]);
+    cv.imshow('canvasOutput4', res[4]);
+    cv.imshow('canvasOutput5', res[5]);
+    cv.imshow('canvasOutput6', res[6]);
+    cv.imshow('canvasOutput7', res[7]);
+    cv.imshow('canvasOutput8', res[8]);
+
+    preenchePorcentagens(calcPorcentagens(res))
+
+    cortar(canvasCut, cropper[1])
+
+    print.style.display = ""
+}
+
+validate[1].onclick = () => {
     containerGrabcut.style.display = " "
     let cropper = cortar(canvasCut)
 
