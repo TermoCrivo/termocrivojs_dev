@@ -35,9 +35,9 @@ export default function grabCut(srcImg, newmask, rectInfo){
   for (let i = 0; i < src.rows; i++) {
     for (let j = 0; j < src.cols; j++) {
       if (mask.ucharPtr(i, j)[0] == 0 || mask.ucharPtr(i, j)[0] == 2) {
-        src.ucharPtr(i, j)[0] = 255;
-        src.ucharPtr(i, j)[1] = 255;
-        src.ucharPtr(i, j)[2] = 255;
+        src.ucharPtr(i, j)[0] = 0;
+        src.ucharPtr(i, j)[1] = 0;
+        src.ucharPtr(i, j)[2] = 0;
       }
     }
   }
