@@ -1,6 +1,6 @@
 ## Sobre
 
-Este sistema foi desenvolvido durante o TCC da mihha formação em Engenharia Biomédica. Ele é capaz de extrair características significativas de imagens termográficas do assoalho pélvico feminino como as porcentagens de cada cor e a segmentação das três áreas de maior temperatura, segmentação esta que pode ser refinada pelo usuário para um resultado mais preciso.
+Este sistema é capaz de extrair características significativas de imagens termográficas do assoalho pélvico feminino como as porcentagens de cada cor e a segmentação das três áreas de maior temperatura, segmentação esta que pode ser refinada pelo usuário para um resultado mais preciso.
 <br>
 Assim sendo, ele é capaz de ajudar fisioterapeutas no tratamento das disfunções no assoalho pélvico como a incontinência urinária, incontinência fecal, a obstrução à evacuação e até o desalinhamento ou mau posicionamento dos órgãos sustentados pela musculatura local, proporcionando ao profissional uma melhor avaliação e entendimento dos exercícios propostos para ativação muscular do assoalho pélvico.
 <br>
